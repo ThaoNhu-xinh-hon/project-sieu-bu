@@ -1,0 +1,174 @@
+body {
+  color: #f4f4f9;
+  margin: 0;
+  padding: 20px;
+  overflow-x: hidden;
+  background-image: url("/8.png");
+  width: 100%;
+  background-size: cover;
+  font-family: "MyCustomFont", sans-serif;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+
+  padding: 20px;
+
+  border-radius: 12px;
+  animation: fadeIn 1s ease-out;
+}
+
+h2,
+h3 {
+  color: rgb(240, 108, 185);
+  text-shadow: 4px 4px 6px rgb(157, 17, 167);
+  font-weight: 1000;
+}
+
+h1 {
+  color: rgb(196, 12, 159);
+  font-size: 4.5em;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 4px 4px 6px rgb(240, 240, 84);
+}
+
+.upload-section,
+.assignment-section,
+.search-section,
+.default-assign-section {
+  margin-bottom: 30px;
+}
+
+label {
+  display: block;
+  margin: 12px 0 8px;
+  color: #e538b1;
+}
+
+input[type="number"],
+input[type="file"],
+input[type="text"] {
+  padding: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1.2px solid #f536d5;
+  background-color: #2b2b3d;
+  color: #f4f4f9;
+  border-radius: 5px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input[type="number"]:focus,
+input[type="file"]:focus,
+input[type="text"]:focus {
+  border-color: #c20bbf;
+  box-shadow: 0 0 8px rgba(210, 69, 158, 0.6);
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  font-size: 1em;
+  letter-spacing: 0.5px;
+  outline: none;
+  background: linear-gradient(to bottom, #a20876, #d9107b, #f363a4, #e779b3);
+}
+
+button:hover {
+  background-color: #ee5bc4;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(235, 93, 150, 0.3);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #d930c0;
+  color: #f4f4f9;
+  border-radius: 8px;
+  overflow: hidden;
+  animation: slideUp 0.7s ease-out;
+}
+
+th,
+td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #852458;
+}
+
+th {
+  background-color: #f12fee;
+  color: #ffffff;
+}
+
+.team-section {
+  margin-top: 30px;
+}
+
+.team-section h3 {
+  text-align: center;
+  color: #f4f4f9;
+  margin-bottom: 10px;
+}
+
+.team-table {
+  margin-bottom: 30px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+button:hover {
+  background-color: #e628cd;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(232, 84, 237, 0.3);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+input:focus,
+button:hover {
+  box-shadow: 0 0 8px rgba(234, 39, 159, 0.6);
+}
+
+tbody tr:hover {
+  background-color: rgba(61, 169, 252, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
