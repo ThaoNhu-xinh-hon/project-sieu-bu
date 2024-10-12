@@ -304,78 +304,77 @@
         });
 
       // Assign default students to teams
-      document
-        .getElementById("assignDefaultButton")
-        .addEventListener("click", function () {
-          const studentID = document
-            .getElementById("defaultStudentID")
-            .value.trim();
-          const studentName = document
-            .getElementById("defaultStudentName")
-            .value.trim();
-          const teamNum = parseInt(
-            document.getElementById("defaultTeam").value
-          );
 
-          if (!studentID || isNaN(teamNum) || (teamNum < 1 && teamNum > 20)) {
-            alert("Vui lòng nhập đúng mã sinh viên và số nhóm.");
-            return;
-          }
+      const buttonUpload = document.getElementById("assignDefaultButton");
 
-          // Tìm sinh viên trong danh sách
-          const studentIndex = students.findIndex((s) => s.id === studentID);
+      buttonUpload.addEventListener("click", function () {
+        const studentID = document
+          .getElementById("defaultStudentID")
+          .value.trim();
+        const studentName = document
+          .getElementById("defaultStudentName")
+          .value.trim();
+        const teamNum = parseInt(document.getElementById("defaultTeam").value);
 
-          if (studentIndex !== -1) {
-            // Sinh viên đã tồn tại, cập nhật nhóm
-            students[studentIndex].name = studentName;
-            students[studentIndex].team = teamNum;
-          } else {
-            // Sinh viên chưa tồn tại, tạo mới
-            const newStudent = {
-              id: studentID,
-              name: studentName,
-              // Thêm các thuộc tính khác cho sinh viên mới (tên, ...)
-              team: teamNum,
-            };
-            students.push(newStudent);
-          }
+        if (!studentID || isNaN(teamNum) || (teamNum < 1 && teamNum > 20)) {
+          alert("Vui lòng nhập đúng mã sinh viên và số nhóm.");
+          return;
+        }
 
-          defaultAssignments[studentID] = teamNum;
-          displayTeams();
-          alert(`Đã phân công ${studentID} vào Nhóm ${teamNum}.`);
+        // Tìm sinh viên trong danh sách
+        const studentIndex = students.findIndex((s) => s.id === studentID);
 
-          document.getElementById("defaultStudentID").value = "";
-          document.getElementById("defaultTeam").value = "";
-        });
+        if (studentIndex !== -1) {
+          // Sinh viên đã tồn tại, cập nhật nhóm
+          students[studentIndex].name = studentName;
+          students[studentIndex].team = teamNum;
+        } else {
+          // Sinh viên chưa tồn tại, tạo mới
+          const newStudent = {
+            id: studentID,
+            name: studentName,
+            // Thêm các thuộc tính khác cho sinh viên mới (tên, ...)
+            team: teamNum,
+          };
+          students.push(newStudent);
+        }
+
+        defaultAssignments[studentID] = teamNum;
+        displayTeams();
+        alert(`Đã phân công ${studentID} vào Nhóm ${teamNum}.`);
+
+        document.getElementById("defaultStudentID").value = "";
+        document.getElementById("defaultTeam").value = "";
+      });
 
       // Clear default assignments
-      document
-        .getElementById("clearDefaultButton")
-        .addEventListener("click", function () {
-          defaultAssignments = {}; // Clear all default assignments
-          students.forEach((student) => {
-            if (student.team && student.id in defaultAssignments) {
-              student.team = null; // Remove team assignment for default students
-            }
-          });
-          displayTeams();
-        });
+      // const clearButton = document.getElementById("clearDefaultButton");
+
+      // clearButton.addEventListener("click", function () {
+      //   defaultAssignments = {}; // Clear all default assignments
+      //   students.forEach((student) => {
+      //     if (student.team && student.id in defaultAssignments) {
+      //       student.team = null; // Remove team assignment for default students
+      //     }
+      //   });
+      //   displayTeams();
+      // });
       // nhap vao sinnh vien tu ben ngoai ma khong co trong danh sach sinh vien
       // Search student by MSSV
-      document
-        .getElementById("searchButton")
-        .addEventListener("click", function () {
-          const searchID = document.getElementById("searchID").value.trim();
-          const student = students.find((s) => s.id === searchID);
+      const searchButton = document.getElementById("searchButton");
 
-          const searchResult = document.getElementById("searchResult");
-          if (student) {
-            const team = student.team ? student.team : "Unassigned";
-            searchResult.textContent = `Student: ${student.name} | Team: ${team}`;
-          } else {
-            searchResult.textContent = "Student not found.";
-          }
-        });
+      searchButton.addEventListener("click", function () {
+        const searchID = document.getElementById("searchID").value.trim();
+        const student = students.find((s) => s.id === searchID);
+
+        const searchResult = document.getElementById("searchResult");
+        if (student) {
+          const team = student.team ? student.team : "Unassigned";
+          searchResult.textContent = `Student: ${student.name} | Team: ${team}`;
+        } else {
+          searchResult.textContent = "Student not found.";
+        }
+      });
 
       // Clear all assignments
       function clearAllAssignments() {

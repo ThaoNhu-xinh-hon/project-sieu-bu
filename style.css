@@ -3,7 +3,7 @@
 body {
   color: #f4f4f9;
   margin: 0;
-  padding: 20px;
+  padding: 0;
   overflow-x: hidden;
   background-image: url("/2.png");
   width: 100%;
@@ -19,6 +19,9 @@ body {
   text-align: center;
   border-radius: 12px;
   animation: fadeIn 1s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 h2,
@@ -523,10 +526,9 @@ tbody tr:hover {
 }
 .selection {
   display: flex;
-  justify-content: space-between;
   margin: 100px;
-  margin-top: -5px;
-  margin-bottom: -5px;
+  justify-content: space-around;
+  margin: auto;
 }
 .button1 {
   margin-top: 30px;
