@@ -3,61 +3,98 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Team Assignment</title>
     <link rel="stylesheet" href="style.css" />
-    <title>Project chia đội của vượt chông gai team</title>
+    <link rel="stylesheet" href="script.js" />
   </head>
+  <div id="logo">
+    <img
+      src="./z5922405366607_529c1af66ce2140a9fb402ae78ad9227-removebg-preview.png"
+      alt="image"
+    />
+  </div>
 
   <body>
     <div class="container">
-      <h1>CHIA ĐỘI CHƠI</h1>
-
+      <div class="chiadoi">
+        <img
+          src="./Remove-bg.ai_1728719531653-removebg-preview.png"
+          width="700px"
+          height="300px"
+          alt=""
+        />
+      </div>
+      <!-- Phần tải tệp TXT -->
       <div class="upload-section">
-        <h2>Tải danh sách sinh viên (TXT)</h2>
+        <h2>Tải lên danh sách (file.txt )</h2>
         <input type="file" id="fileInput" accept=".txt" />
+        <br />
         <button id="uploadButton">Tải lên</button>
       </div>
 
-      <div class="default-assign-section">
-        <h2>Thêm thành viên vào team</h2>
-        <label for="defaultStudentID">Nhập mã số sinh viên</label>
-        <input type="text" id="defaultStudentID" placeholder="VD: 24730511" />
-        <label for="defaultTeam">Chọn team</label>
-        <input
-          type="number"
-          id="defaultTeam"
-          min="1"
-          placeholder="Enter team number VD: 1"
-        />
-        <button id="assignDefaultButton">Xác nhận</button>
-        <button id="clearDefaultButton" style="margin-left: 0px">
-          Xóa dữ liệu trước đó
-        </button>
+      <!-- Phần gán sinh viên mặc định -->
+
+      <!-- Hiển thị danh sách sinh viên theo từng đội -->
+      <div id="teamTablesContainer" class="team-section">
+        <!-- Các bảng đội sẽ được thêm vào đây -->
+      </div>
+      <div class="pyro">
+        <div class="before"></div>
+        <div class="after"></div>
       </div>
 
-      <div id="teamTablesContainer" class="team-section"></div>
+      <div class="selection">
+        <div class="default-assign-section">
+          <h2>Chọn đội cố định cho thành viên.</h2>
+          <label for="defaultStudentName">Họ và Tên </label>
+          <input
+            type="text"
+            id="defaultStudentName"
+            placeholder="VD: Nguyễn Hữu Khang"
+          />
+          <label for="defaultStudentID">Mã số thành viên:</label>
+          <input type="text" id="defaultStudentID" placeholder="VD: 24730511" />
+          <label for="defaultTeam">Chọn team cho thành viên:</label>
+          <input type="number" id="defaultTeam" min="1" placeholder="VD: 1" />
+          <br />
+          <button id="assignDefaultButton">Xác nhận</button>
+          <br />
+        </div>
+        <!-- Phần gán đội cho sinh viên -->
+        <div class="assignment-section">
+          <h2>Nhập số đội, và số thành viên cho mỗi đội.</h2>
+          <label for="numTeams">Nhập số đội:</label>
+          <input
+            type="number"
+            id="numTeams"
+            min="1"
+            required
+            placeholder="VD: 3"
+          /><br />
+          <label for="numMembers">Nhập số thành viên cho mỗi đội:</label>
+          <input
+            type="number"
+            id="numMembers"
+            min="1"
+            required
+            placeholder="VD 3"
+          /><br />
 
-      <div class="assignment-section">
-        <h2>Chỉ định thành viên vào nhóm</h2>
-        <label for="numTeams">Nhập vào số đội muốn có</label>
-        <input type="number" id="numTeams" min="1" required /><br />
-        <label for="numMembers">Số người mỗi đội</label>
-        <input type="number" id="numMembers" min="1" required /><br />
-
-        <button id="assignTeamsButton">Bắt đầu random</button>
-        <button id="randomizeTeamsButton" style="margin-left: 0px">
-          Random lại
-        </button>
+          <div class="button1">
+            <button id="assignTeamsButton">Bắt đầu random danh sách</button>
+            <button id="randomizeTeamsButton" style="margin-left: 0px">
+              Random lại danh sách
+            </button>
+          </div>
+        </div>
       </div>
 
-      <!-- Button to download CSV -->
-      <button id="downloadCSVButton" style="margin-top: 20px">
-        Download danh sách team (.csv)
-      </button>
-
+      <!-- Tìm kiếm sinh viên -->
       <div class="search-section">
-        <h2>Tìm kiếm sinh viên</h2>
-        <label for="searchID">Nhập mã số sinh viên</label>
-        <input type="number" id="searchID" />
+        <h2>Tìm kiếm thành viên.</h2>
+        <label for="searchID">Hãy nhập mã số thành viên.</label>
+        <input type="number" id="searchID" placeholder="VD: 24730511   " />
+        <br />
         <button id="searchButton">Tìm kiếm</button>
         <p id="searchResult"></p>
       </div>
@@ -65,8 +102,9 @@
 
     <script>
       let students = [];
-      let defaultAssignments = {};
+      let defaultAssignments = {}; // To store manually assigned students
 
+      // Load TXT or CSV file and process
       document
         .getElementById("uploadButton")
         .addEventListener("click", function () {
@@ -81,11 +119,18 @@
           const reader = new FileReader();
           reader.onload = function (e) {
             const content = e.target.result;
-            processTXT(content);
+            if (file.name.endsWith(".txt")) {
+              processTXT(content); // Process the TXT file content
+            } else if (file.name.endsWith(".csv")) {
+              processCSV(content); // Process the CSV file content
+            } else {
+              alert("Unsupported file type. Please upload a TXT or CSV file.");
+            }
           };
           reader.readAsText(file);
         });
 
+      // Process TXT content
       function processTXT(content) {
         const lines = content.split("\n");
         students = [];
@@ -107,6 +152,27 @@
         displayTeams();
       }
 
+      // Process CSV content
+      function processCSV(content) {
+        const rows = content.split("\n");
+        students = [];
+        defaultAssignments = {};
+
+        rows.forEach((row) => {
+          const [studentID, studentName] = row.split(",");
+          if (studentID && studentName) {
+            students.push({
+              id: studentID.trim(),
+              name: studentName.trim(),
+              team: null,
+            });
+          }
+        });
+
+        displayTeams();
+      }
+
+      // Display students by team
       function displayTeams() {
         const teamTablesContainer = document.getElementById(
           "teamTablesContainer"
@@ -115,6 +181,7 @@
 
         let teams = {};
 
+        // Group students by their teams
         students.forEach((student) => {
           const teamNum = student.team ? student.team : "Unassigned";
           if (!teams[teamNum]) {
@@ -123,179 +190,232 @@
           teams[teamNum].push(student);
         });
 
-        for (let team in teams) {
+        // Create table for each team
+        for (const teamNum in teams) {
+          const teamSection = document.createElement("div");
+          teamSection.classList.add("team-table");
+          const teamTitle = document.createElement("h3");
+          teamTitle.textContent = `Team ${teamNum}`;
+          teamSection.appendChild(teamTitle);
+
           const table = document.createElement("table");
-          table.className = "team-table";
+          table.innerHTML = `
+                <thead> 
+                    <tr>
+                         <th>MSSV</th>
+             <th>Ho va Ten</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            `;
 
-          const headerRow = document.createElement("tr");
-          const header1 = document.createElement("th");
-          header1.textContent = `Team ${team}`;
-          headerRow.appendChild(header1);
+          const tbody = table.querySelector("tbody");
 
-          const header2 = document.createElement("th");
-          header2.textContent = "Student Name";
-          headerRow.appendChild(header2);
-
-          table.appendChild(headerRow);
-
-          teams[team].forEach((student) => {
+          teams[teamNum].forEach((student) => {
             const row = document.createElement("tr");
-            const cell1 = document.createElement("td");
-            cell1.textContent = student.id;
-            row.appendChild(cell1);
-
-            const cell2 = document.createElement("td");
-            cell2.textContent = student.name;
-            row.appendChild(cell2);
-
-            table.appendChild(row);
+            row.innerHTML = `
+                    <td>${student.id}</td>
+                    <td>${student.name}</td>
+                `;
+            tbody.appendChild(row);
           });
 
-          teamTablesContainer.appendChild(table);
+          teamSection.appendChild(table);
+          teamTablesContainer.appendChild(teamSection);
         }
       }
 
-      document
-        .getElementById("assignDefaultButton")
-        .addEventListener("click", function () {
-          const defaultStudentID = document
-            .getElementById("defaultStudentID")
-            .value.trim();
-          const defaultTeam = document
-            .getElementById("defaultTeam")
-            .value.trim();
+      // Shuffle students array
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
 
-          if (!defaultStudentID || !defaultTeam) {
-            alert("Please fill in both the student ID and team number.");
-            return;
+      // Assign random students to teams, ensuring minimal difference in team sizes
+      function assignTeams(numTeams, unassignedStudents) {
+        const teamCounts = {}; // Store the number of students in each team, including default assignments
+        for (let i = 1; i <= numTeams; i++) {
+          teamCounts[i] = 0; // Initialize each team count to 0
+        }
+
+        // Count students already assigned to teams
+        students.forEach((student) => {
+          if (student.team) {
+            teamCounts[student.team]++;
           }
-
-          defaultAssignments[defaultStudentID] = defaultTeam;
-          assignTeams();
         });
 
-      document
-        .getElementById("clearDefaultButton")
-        .addEventListener("click", function () {
-          defaultAssignments = {};
-          assignTeams();
+        const shuffledStudents = shuffleArray(unassignedStudents.slice());
+
+        // Sort teams by the number of current members (ascending)
+        const sortedTeams = Object.keys(teamCounts).sort(
+          (a, b) => teamCounts[a] - teamCounts[b]
+        );
+
+        // Assign unassigned students to teams
+        shuffledStudents.forEach((student) => {
+          // Always assign to the team with the least members
+          const teamNum = sortedTeams[0]; // Get the team with the least members
+          student.team = parseInt(teamNum); // Assign the student to that team
+          teamCounts[teamNum]++; // Increment the count for that team
+
+          // Resort teams after each assignment to ensure balance
+          sortedTeams.sort((a, b) => teamCounts[a] - teamCounts[b]);
         });
 
+        return teamCounts; // Return the updated team counts (if needed)
+      }
+
+      // Assign students to teams on button click
       document
         .getElementById("assignTeamsButton")
         .addEventListener("click", function () {
-          assignTeams();
-        });
-
-      function assignTeams() {
-        const numTeams = parseInt(document.getElementById("numTeams").value);
-        const numMembers = parseInt(
-          document.getElementById("numMembers").value
-        );
-
-        if (!numTeams || !numMembers || students.length === 0) {
-          alert("Please enter valid team numbers and members.");
-          return;
-        }
-
-        // Reset previous team assignments
-        students.forEach((student) => {
-          student.team = null;
-        });
-
-        let teamCount = 1;
-        let studentIndex = 0;
-
-        // Assign default students to teams first
-        Object.keys(defaultAssignments).forEach((mssv) => {
-          const student = students.find((s) => s.id === mssv);
-          if (student) {
-            student.team = defaultAssignments[mssv];
+          const numTeams = parseInt(document.getElementById("numTeams").value);
+          const numMembers = parseInt(
+            document.getElementById("numMembers").value
+          );
+          if (numTeams >= 20) {
+            alert("Value Limit");
+            return;
           }
-        });
+          if (
+            isNaN(numTeams) ||
+            (numTeams < 1 && numTeams > 20) ||
+            isNaN(numMembers) ||
+            numMembers < 1
+          ) {
+            alert("Please enter valid numbers for teams and members.");
+            return;
+          }
+          const unassignedStudents = students.filter(
+            (s) => !defaultAssignments[s.id] && !s.team
+          );
 
-        // Randomly assign remaining students
-        const unassignedStudents = students.filter((s) => !s.team);
-        unassignedStudents.sort(() => Math.random() - 0.5);
-
-        unassignedStudents.forEach((student) => {
-          student.team = teamCount;
-          studentIndex++;
-
-          if (studentIndex >= numMembers) {
-            teamCount++;
-            studentIndex = 0;
+          if (unassignedStudents.length === 0) {
+            alert("All students are already assigned to a team.");
+            return;
           }
 
-          if (teamCount > numTeams) {
-            teamCount = 1;
-          }
+          assignTeams(numTeams, unassignedStudents);
+          displayTeams();
         });
 
-        displayTeams();
-      }
+      // Assign default students to teams
+      document
+        .getElementById("assignDefaultButton")
+        .addEventListener("click", function () {
+          const studentID = document
+            .getElementById("defaultStudentID")
+            .value.trim();
+          const studentName = document
+            .getElementById("defaultStudentName")
+            .value.trim();
+          const teamNum = parseInt(
+            document.getElementById("defaultTeam").value
+          );
 
-      // Search functionality
+          if (!studentID || isNaN(teamNum) || (teamNum < 1 && teamNum > 20)) {
+            alert("Vui lòng nhập đúng mã sinh viên và số nhóm.");
+            return;
+          }
+
+          // Tìm sinh viên trong danh sách
+          const studentIndex = students.findIndex((s) => s.id === studentID);
+
+          if (studentIndex !== -1) {
+            // Sinh viên đã tồn tại, cập nhật nhóm
+            students[studentIndex].name = studentName;
+            students[studentIndex].team = teamNum;
+          } else {
+            // Sinh viên chưa tồn tại, tạo mới
+            const newStudent = {
+              id: studentID,
+              name: studentName,
+              // Thêm các thuộc tính khác cho sinh viên mới (tên, ...)
+              team: teamNum,
+            };
+            students.push(newStudent);
+          }
+
+          defaultAssignments[studentID] = teamNum;
+          displayTeams();
+          alert(`Đã phân công ${studentID} vào Nhóm ${teamNum}.`);
+
+          document.getElementById("defaultStudentID").value = "";
+          document.getElementById("defaultTeam").value = "";
+        });
+
+      // Clear default assignments
+      document
+        .getElementById("clearDefaultButton")
+        .addEventListener("click", function () {
+          defaultAssignments = {}; // Clear all default assignments
+          students.forEach((student) => {
+            if (student.team && student.id in defaultAssignments) {
+              student.team = null; // Remove team assignment for default students
+            }
+          });
+          displayTeams();
+        });
+      // nhap vao sinnh vien tu ben ngoai ma khong co trong danh sach sinh vien
+      // Search student by MSSV
       document
         .getElementById("searchButton")
         .addEventListener("click", function () {
           const searchID = document.getElementById("searchID").value.trim();
-          const result = students.find((student) => student.id === searchID);
+          const student = students.find((s) => s.id === searchID);
 
-          if (result) {
-            document.getElementById(
-              "searchResult"
-            ).textContent = `${result.name} is assigned to Team ${result.team}`;
+          const searchResult = document.getElementById("searchResult");
+          if (student) {
+            const team = student.team ? student.team : "Unassigned";
+            searchResult.textContent = `Student: ${student.name} | Team: ${team}`;
           } else {
-            document.getElementById("searchResult").textContent =
-              "No student found with that MSSV.";
+            searchResult.textContent = "Student not found.";
           }
         });
 
-      // Randomize teams functionality
+      // Clear all assignments
+      function clearAllAssignments() {
+        students.forEach((student) => {
+          student.team = null;
+        });
+        defaultAssignments = {};
+        displayTeams();
+      }
+
+      // Re-randomize teams
       document
         .getElementById("randomizeTeamsButton")
         .addEventListener("click", function () {
-          assignTeams();
-        });
+          const numTeams = parseInt(document.getElementById("numTeams").value);
+          if (numTeams >= 20) {
+            alert("Nhap tao lao roi cha oi!!");
+            return;
+          }
+          // Ask if the user wants to reset all assignments
+          if (
+            confirm(
+              "Do you want to clear all previous assignments before randomizing?"
+            )
+          ) {
+            clearAllAssignments();
+          }
 
-      // Function to convert students array to CSV format
-      function generateCSV(students) {
-        let csvContent = "data:text/csv;charset=utf-8,";
-        csvContent += "MSSV,Student Name,Team\n"; // CSV header
+          const unassignedStudents = students.filter(
+            (s) => !defaultAssignments[s.id] && !s.team
+          );
 
-        students.forEach((student) => {
-          let row = `${student.id},${student.name},${
-            student.team || "Unassigned"
-          }`; // Handle unassigned students
-          csvContent += row + "\n";
-        });
-
-        return csvContent;
-      }
-
-      // Trigger CSV download
-      document
-        .getElementById("downloadCSVButton")
-        .addEventListener("click", function () {
-          if (students.length === 0) {
-            alert("No students available to download.");
+          if (unassignedStudents.length === 0) {
+            alert("No unassigned students available for randomization.");
             return;
           }
 
-          // Generate CSV content
-          const csvContent = generateCSV(students);
-
-          // Create a download link
-          const encodedUri = encodeURI(csvContent);
-          const link = document.createElement("a");
-          link.setAttribute("href", encodedUri);
-          link.setAttribute("download", "team_assignments.csv");
-
-          // Append the link to the body and trigger the download
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+          assignTeams(numTeams, unassignedStudents);
+          displayTeams();
         });
     </script>
   </body>
