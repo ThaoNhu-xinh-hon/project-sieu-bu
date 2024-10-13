@@ -5,19 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Team Assignment</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stylesss.css">
   </head>
   <div id="logo">
     <img
-      src="./z5922405366607_529c1af66ce2140a9fb402ae78ad9227-removebg-preview.png"
+      src="/z5922405366607_529c1af66ce2140a9fb402ae78ad9227-removebg-preview.png"
       alt="image"
     />
   </div>
 
   <body>
+    <div class="pyro"><div class="before"></div><div class="after"></div></div>
     <div class="container">
       <div class="chiadoi">
         <img
-          src="./Remove-bg.ai_1728719531653-removebg-preview.png"
+          src="/Remove-bg.ai_1728719531653-removebg-preview.png"
           width="700px"
           height="300px"
           alt=""
@@ -70,23 +73,25 @@
             required
             placeholder="VD: 3"
           /><br />
-          <label for="numMembers">Nhập số thành viên cho mỗi đội:</label>
-          <input
+          <!-- <label for="numMembers">Nhập số thành viên cho mỗi đội:</label> -->
+          <!-- <input
             type="number"
             id="numMembers"
             min="1"
             required
-            placeholder="VD 3"
-          /><br />
+            placeholder="VD 3" -->
+          <!-- /> -->
+          <br />
 
           <div class="button1">
-            <button id="assignTeamsButton">Bắt đầu random danh sách</button>
+            <!-- <button id="assignTeamsButton">Bắt đầu random danh sách</button> -->
             <button id="randomizeTeamsButton" style="margin-left: 0px">
-              Random lại danh sách
+              Bắt đầu chia đội
             </button>
           </div>
         </div>
       </div>
+<div class="pyro"><div class="before"></div><div class="after"></div></div>
 
       <!-- Tìm kiếm sinh viên -->
       <div class="search-section">
@@ -184,7 +189,7 @@
         students.forEach((student) => {
           const teamNum = student.team ? student.team : "Unassigned";
           if (!teams[teamNum]) {
-            teams[teamNum] = [];
+teams[teamNum] = [];
           }
           teams[teamNum].push(student);
         });
@@ -268,40 +273,39 @@
 
         return teamCounts; // Return the updated team counts (if needed)
       }
+// Assign students to teams on button click
+    //   document
+    //     .getElementById("assignTeamsButton")
+    //     .addEventListener("click", function () {
+    //       const numTeams = parseInt(document.getElementById("numTeams").value);
+    //       const numMembers = parseInt(
+    //         document.getElementById("numMembers").value
+    //       );
+    //       if (numTeams >= 20) {
+    //         alert("Value Limit");
+    //         return;
+    //       }
+    //       if (
+    //         isNaN(numTeams) ||
+    //         (numTeams < 1 && numTeams > 20) ||
+    //         isNaN(numMembers) ||
+    //         numMembers < 1
+    //       ) {
+    //         alert("Please enter valid numbers for teams and members.");
+    //         return;
+    //       }
+    //       const unassignedStudents = students.filter(
+    //         (s) => !defaultAssignments[s.id] && !s.team
+    //       );
 
-      // Assign students to teams on button click
-      document
-        .getElementById("assignTeamsButton")
-        .addEventListener("click", function () {
-          const numTeams = parseInt(document.getElementById("numTeams").value);
-          const numMembers = parseInt(
-            document.getElementById("numMembers").value
-          );
-          if (numTeams >= 20) {
-            alert("Value Limit");
-            return;
-          }
-          if (
-            isNaN(numTeams) ||
-            (numTeams < 1 && numTeams > 20) ||
-            isNaN(numMembers) ||
-            numMembers < 1
-          ) {
-            alert("Please enter valid numbers for teams and members.");
-            return;
-          }
-          const unassignedStudents = students.filter(
-            (s) => !defaultAssignments[s.id] && !s.team
-          );
+    //       if (unassignedStudents.length === 0) {
+    //         alert("All students are already assigned to a team.");
+    //         return;
+    //       }
 
-          if (unassignedStudents.length === 0) {
-            alert("All students are already assigned to a team.");
-            return;
-          }
-
-          assignTeams(numTeams, unassignedStudents);
-          displayTeams();
-        });
+    //       assignTeams(numTeams, unassignedStudents);
+    //       displayTeams();
+    //     });
 
       // Assign default students to teams
 
@@ -341,7 +345,7 @@
 
         defaultAssignments[studentID] = teamNum;
         displayTeams();
-        alert(`Đã phân công ${studentID} vào Nhóm ${teamNum}.`);
+        // alert(`Đã phân công ${studentID} vào Nhóm ${teamNum}.`);
 
         document.getElementById("defaultStudentID").value = "";
         document.getElementById("defaultTeam").value = "";
@@ -352,7 +356,7 @@
 
       // clearButton.addEventListener("click", function () {
       //   defaultAssignments = {}; // Clear all default assignments
-      //   students.forEach((student) => {
+//   students.forEach((student) => {
       //     if (student.team && student.id in defaultAssignments) {
       //       student.team = null; // Remove team assignment for default students
       //     }
@@ -390,14 +394,15 @@
         .getElementById("randomizeTeamsButton")
         .addEventListener("click", function () {
           const numTeams = parseInt(document.getElementById("numTeams").value);
-          if (numTeams >= 20) {
-            alert("Nhap tao lao roi cha oi!!");
+          if (numTeams >= 20 ) {
+            alert("Bạn đã nhập quá giới hạn cho phép! Vui lòng nhập lại!");
             return;
           }
+          
           // Ask if the user wants to reset all assignments
           if (
             confirm(
-              "Do you want to clear all previous assignments before randomizing?"
+              "Bạn không thay đổi chứ? Bắt đầu chia đội!"
             )
           ) {
             clearAllAssignments();
@@ -408,7 +413,7 @@
           );
 
           if (unassignedStudents.length === 0) {
-            alert("No unassigned students available for randomization.");
+            alert("Không có sinh viên, danh sách trống không thể bắt đầu!");
             return;
           }
 

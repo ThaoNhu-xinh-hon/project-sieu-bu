@@ -1,0 +1,245 @@
+/* Mobile styles */
+@media (max-width: 768px) {
+  body {
+    color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-image: url("/2.png");
+    width: 100%;
+    background-attachment: fixed;
+    font-family: "Be Vietnam Pro", sans-serif;
+    background-size: cover;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    animation: fadeIn 1s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  h2,
+  h3 {
+    color: #fff59d;
+    text-shadow: 4px 4px 6px rgb(105, 12, 105);
+    font-weight: 1000;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    color: yellow;
+    font-size: 4.5em;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 4px 4px 6px rgb(126, 30, 41, 0.882);
+  }
+}
+
+@media (max-width: 768px) {
+  .upload-section,
+  .assignment-section,
+  .search-section,
+  .default-assign-section {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  label {
+    display: block;
+    margin: 12px 0 8px;
+    color: rgb(26, 204, 186);
+  }
+}
+
+@media (max-width: 768px) {
+  input[type="number"],
+  input[type="file"],
+  input[type="text"] {
+    padding: 15px;
+    width: 450px;
+    height: 50px;
+    box-sizing: border-box;
+    border: 1.2px solid #9f7e09;
+    background-color: #39395f;
+    color: #f4f4f9;
+    border-radius: 5px;
+    outline: none;
+    transition: 0.3s;
+  }
+}
+
+@media (max-width: 768px) {
+  input[type="number"]:focus,
+  input[type="file"]:focus,
+  input[type="text"]:focus {
+    border-color: #d1c4e9;
+    box-shadow: 0 0 8px rgba(93, 178, 238, 0.6);
+  }
+}
+
+@media (max-width: 768px) {
+  button {
+    margin-top: 15px;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-size: 1em;
+    letter-spacing: 0.5px;
+    outline: none;
+    color: white;
+    background: linear-gradient(to bottom, #41bcb4, #06778e, #0e8a9a, #64ebf0);
+  }
+}
+
+@media (max-width: 768px) {
+  button:hover {
+    background-color: #ee5bc4;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(235, 93, 150, 0.3);
+  }
+}
+
+@media (max-width: 768px) {
+  button:active {
+    transform: translateY(1px);
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 768px) {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #146c8ff9;
+    color: #f4f4f9;
+    border-radius: 8px;
+    overflow: hidden;
+    animation: slideUp 0.7s ease-out;
+  }
+}
+
+@media (max-width: 768px) {
+  th,
+  td {
+    padding: 20px;
+    text-align: left;
+    border-bottom: 1px solid #852458;
+  }
+}
+
+@media (max-width: 768px) {
+  th {
+    background-color: #249dde;
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 768px) {
+  .team-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centers and spaces the tables evenly */
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .team-table {
+    margin-bottom: 30px;
+    width: 400px; /* Adjust width to fit multiple tables side by side */
+    margin: 10px; /* Add margin to space out the tables */
+  }
+}
+
+@media (max-width: 768px) {
+  .team-section h3 {
+    text-align: center;
+    color: #f4f4f9;
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 768px) {
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  button:hover {
+    background-color: #4528e6;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(92, 145, 235, 0.3);
+  }
+}
+@media (max-width: 768px) {
+  button:active {
+    transform: translateY(1px);
+    box-shadow: none;
+  }
+}
+@media (max-width: 768px) {
+  input:focus,
+  button:hover {
+    box-shadow: 0 0 8px rgba(234, 39, 159, 0.6);
+  }
+}
+@media (max-width: 768px) {
+  tbody tr:hover {
+    background-color: rgba(61, 169, 252, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+}
+@media (max-width: 768px) {
+  #logo img {
+    max-width: 250px;
+    height: auto;
+    margin-left: 24%;
+    margin-top: 5px;
+    margin-bottom: -50px;
+  }
+}
+@media (max-width: 768px) {
+  .chiadoi {
+    margin-bottom: -120px;
+    margin-top: -50px;
+  }
+}
+@media (max-width: 768px) {
+  .button1 {
+    margin-top: 30px;
+  }
+}
