@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-image: url(./page/8.png);
+  width: 100%;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.logo img {
+  width: 270px;
+  height: 68px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.chiadoi {
+  text-align: center;
+  margin-top: -95px;
+  height: 250px;
+}
+.container {
+  text-align: center;
+  background-image: url(./page/Rectangle\ 1.png);
+  height: 500px;
+  width: 90%;
+  background-position: center;
+  border-radius: 20px;
+}
+.upload-section {
+}

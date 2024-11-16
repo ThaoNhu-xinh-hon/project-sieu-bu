@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khi chia đội khó có Random lo!</title>
+    <link rel="stylesheet" href="asset/style.css" />
+     <!-- <link rel="stylesheet" href="asset/phaohoa.css"> -->
+  </head>
+  <div id="logo">
+    <img
+      src="./assets/image/z5915434975083_1399733f3949a2d1f4ed77e11fe7ac17-removebg-preview.png"
+      alt="image"
+    />
+  </div>
+
+  <body>
+    <div class="pyro"><div class="before"></div><div class="after"></div></div>
+    <div class="container">
+      <div class="chiadoi">
+        <a href="./page/index2.html">
+            <img
+                src="assets/image/Remove-bg.ai_1728719531653-removebg-preview.png"
+                width="700px"
+                height="300px"
+                alt=""
+            />
+        </a>
+      </div>
+      <!-- Phần tải tệp TXT -->
+      <div class="upload-section">
+        <h2>Tải lên danh sách (file.txt, file.csv)</h2>
+        <input type="file" id="fileInput" accept=".txt" />
+        <br />
+        <button id="uploadButton">Tải lên</button>
+         
+      </div>
+      <div class="pyro">
+        <div class="before"></div>
+        <div class="after"></div>
+      </div>
+      <!-- Nhập số đội -->
+      <div class="assignment-section">
+        <h2>Nhập số đội bạn mong muốn.</h2>
+        <label for="numTeams">Nhập số đội:</label>
+        <input
+          type="number"
+          id="numTeams"
+          min="1"
+          required
+          placeholder="VD: 3"
+        />
+        <div class="button1">
+            <button id="randomizeTeamsButton" style="margin-left: 0px" >
+              Bắt đầu chia đội
+            </button>
+          </div>
+      <div class="selection">
+        <div class="default-assign-section">
+          <h2>Chọn đội cố định cho sinh viên viên.</h2>
+          <label for="defaultStudentName">Họ và Tên </label>
+          <input
+            type="text"
+            id="defaultStudentName"
+            placeholder="VD: Nguyễn Hữu Khang"
+          />
+          <label for="defaultStudentID">Mã số sinh viên:</label>
+          <input type="number" id="defaultStudentID" placeholder="VD: 24730511" />
+          <label for="defaultTeam">Chọn team cho sinh viên:</label>
+          <input type="number" id="defaultTeam" min="1" placeholder="VD: 1" />
+          <br />
+          <button id="assignDefaultButton">Xác nhận</button>
+          <br />
+        </div>
+        <!-- <h1>Nhập Tên và Mã Số Sinh Viên</h1>
+    <textarea id="studentsInput" rows="10" cols="50" placeholder="Nhập mã số sinh viên và tên (MSSV, Tên Sinh Viên mỗi sinh viên trên một dòng)"></textarea><br>
+    <input type="number" id="numTeams" placeholder="Số đội" min="1"><br>
+    <button id="assignTeamsButton">Chia Đội</button>
+
+    <div id="teamsDisplay"></div> -->
+
+        <!-- <textarea id="bulkInput" rows="10" placeholder="Enter each student name on a new line"></textarea>
+<input type="number" id="numTeams" placeholder="Enter number of teams" min="1">
+<button id="addBulkStudentsButton">Add Students</button>
+<div id="teamsDisplay"></div>
+<div id="bulkTableDisplay"></div> -->
+
+
+              <!-- Các bảng đội sẽ được thêm vào đây -->
+        <details open>
+<div id="teamTablesContainer" class="team-section"></div> <!-- Bảng "Danh sách sau khi random" -->
+
+          </details>
+          <h2>Chỉnh sửa trực tiếp</h2>
+          <label for="defaultStudentID">Nhập mã số sinh viên để xóa</label>
+          <input type="number" name="" id="deleteStudentID" placeholder="Nhập mssv cần xóa">
+          <br>
+          <button id="deleteButton">Xóa</button>
+        </div>
+      </div>
+      <!-- Tìm kiếm sinh viên -->
+      <div class="search-section">
+        <h2>Tìm kiếm thành viên.</h2>
+        <label for="searchID">Hãy nhập mã số thành viên.</label>
+        <input type="number" id="searchID" placeholder="VD: 24730511   " />
+        <br />
+        <button id="searchButton">Tìm kiếm</button>
+        <p id="searchResult"></p>
+      </div>
+      
+    </div>
+    <script src="public/main.js"></script>
+    <script src="public/swap.js"></script>
+    <script src="public/edit.js"></script>
+    <script src="public/textarea2.0.js"></script>
+  </body>
+</html>
